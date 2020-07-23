@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+
+
+#源码安装先决条件：https://dev.mysql.com/doc/refman/8.0/en/source-installation-prerequisites.html
+
+#yum install -y  gcc  gcc-c++  ncurses ncurses-devel  bison
+
+
+#if [ ! -e ${DOWNLOAD_FOLDER}/cmake-3.6.2.tar.gz ]
+#then
+#  wget -P ${DOWNLOAD_FOLDER} https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz
+#fi
+
+#tar xvf cmake-3.6.2.tar.gz -C ${TMP_FOLDER} && cd ${TMP_FOLDER}/cmake-3.6.2
+#./bootstrap --prefix=${INSTALL_PATH}/cmake
+#gmake
+#gmake install
+#ln -s ${INSTALL_PATH}/cmake/bin/cmake /usr/bin/cmake
+#cd -
+# 编译构建参数 https://dev.mysql.com/doc/refman/8.0/en/source-configuration-options.html
+
+
+
+if [ ! -e ${DOWNLOAD_FOLDER}/gcc-9.2.0.tar.gz ]
+then
+  wget -P ${DOWNLOAD_FOLDER} http://mirror.hust.edu.cn/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.xz
+fi
+
+tar xvf gcc-9.2.0.tar.gz -C ${TMP_FOLDER} && cd ${TMP_FOLDER}/gcc-9.2.0

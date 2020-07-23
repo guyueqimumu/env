@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+
+#Install PHP dependencies
+#if [ ! -e ${DOWNLOAD_FOLDER}/libxml2-${LIBXML2_VERSION}.tar.gz ]
+#then
+#  wget -P ${DOWNLOAD_FOLDER} http://xmlsoft.org/sources/old/libxml2-${LIBXML2_VERSION}.tar.gz
+#fi
+#tar -zxvf ${DOWNLOAD_FOLDER}/libxml2-${LIBXML2_VERSION}.tar.gz && cd libxml2-${LIBXML2_VERSION}
+#./configure
+#make -j4 && make install
+yum install -y libxml2-devel  libxml2
+
+
+# Install PHP
+if [ ! -e ${DOWNLOAD_FOLDER}/php-${PHP_VERSION}.tar.gz ]
+then
+  wget -P ${DOWNLOAD_FOLDER} https://www.php.net/distributions/php-${PHP_VERSION}.tar.gz
+fi
+
+tar -zxvf ${DOWNLOAD_FOLDER}/php-${PHP_VERSION}.tar.gz -C ${TMP_FOLDER} && cd ${TMP_FOLDER}/php-${PHP_VERSION}
+./configure --prefix=${INSTALL_PATH}/php
+make -j4 && make install
+
+
+cp ${TMP_FOLDER}/php-${PHP_VERSION}/php.ini-development ${INSTALL_PATH}/php/etc/php.ini
+#echo "alias php-${PHP_VERSION}='${INSTALL_PATH}/php/bin/php'" >> ~/.bashrc
+ln -s ${INSTALL_PATH}/php/bin/php  /usr/bin/php
+ln -s ${INSTALL_PATH}/php/bin/pecl  /usr/bin/pecl
+cd -

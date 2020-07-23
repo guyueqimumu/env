@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+
+rpm -Uvh mysql80-community-release-el7-1.noarch.rpm
+
+yum install mysql-community-server
+service mysqld start
+
+

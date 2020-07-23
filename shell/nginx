@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+yum   install -y  pcre-devel zlib zlib-devel openssl openssl-devel
+
+if [ ! -e ${DOWNLOAD_FOLDER}/nginx-${NGINX_VERSION}.tar.gz ]
+then
+  wget -P ${DOWNLOAD_FOLDER} http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
+fi
+tar -zxvf ${DOWNLOAD_FOLDER}/nginx-${NGINX_VERSION}.tar.gz -C ${TMP_FOLDER} && cd ${TMP_FOLDER}/nginx-${NGINX_VERSION}
+./configure --prefix=${INSTALL_PATH}/nginx --sbin-path=${INSTALL_PATH}/nginx/sbin/nginx --conf-path=${INSTALL_PATH}/nginx/config/nginx.conf --error-log-path=${INSTALL_PATH}/nginx/logs/error.log --pid-path=${INSTALL_PATH}/nginx/runtime/nginx.pid --http-log-path=${INSTALL_PATH}/nginx/logs/success.log
+
+make -j4 && make install
+
+#echo "alias nginx-${NGINX_VERSION}='${INSTALL_PATH}/nginx/sbin/nginx'" >> ~/.bashrc
+ln -s ${INSTALL_PATH}/nginx/sbin/nginx  /usr/bin/nginx
+cd -
